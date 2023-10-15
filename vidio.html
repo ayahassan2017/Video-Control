@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task1</title>
+    <link rel="stylesheet" href="vidio.css">
+</head>
+<body>
+    <video id="vid" src="./The Sneezing Song _ CoComelon Nursery Rhymes & Kids Songs (1).mp4" poster="./Music_480x480@2x.webp" width=500px ontimeupdate="vidTimeRange1()"></video>
+
+
+    <input id="time" style="width:450px" type="range" min="0" max="238" value="0" step="1"
+  onchange="duration()" />
+    <span id="vidtim"></span>
+<br>
+   <button id="bt1" onclick="play()">play</button>
+   <button id="bt2" onclick="pause()">stop</button>
+   <button onclick="startVid()">&lt&lt</button>
+   <button onclick="backward()">&lt</button>
+   <button onclick="forward()">&gt</button>
+   <button onclick="endVid()">&gt&gt</button>
+   <input id="sound" type="range" onchange="volume(this)" min="0" max="1" value="1" step="0.1">
+   <button id="mute" onclick="mute()">mute</button>
+   <br>
+   <br>
+   speed<input type="range"onchange= "speed(this)" min="0" max="1" step="0.1" value="0.5" >
+
+
+<script>
+    var myvid = document.getElementById("vid");
+
+    var btn1 = document.getElementById("bt1");
+    btn1.addEventListener("click",x)
+    function x(){
+        myvid.play()
+    }
+  
+   var btn2 = document.getElementById("bt2");
+   btn2.addEventListener("click",y)
+    function y(){
+        myvid.pause();
+        myvid.currentTime = 0;
+    };
+
+    function volume(a){
+        myvid.volume = a.value
+    }
+    function speed(e) {
+        myvid.playbackRate = e.value
+    myvid.playbackRate
+    }
+    function mute(){
+        if(myvid.muted==true){
+            myvid.muted = false
+        }
+        else{myvid.muted=true}
+    }
+    function startVid(){
+        myvid.currentTime=0
+    };
+    function endVid(){
+        myvid.currentTime=myvid.duration
+    };
+    function backward(){
+        myvid.currentTime -=5
+    }
+    function forward(){
+        myvid.currentTime +=5
+    
+    }
+
+    var vidDur = document.getElementById("time")
+    var vidTim = document.getElementById("vidtime")
+    function duration(){
+        myvid.currentTime = vidDur.value
+    }
+    myvid.ontimeupdate = function(){
+        vidDur.value = myvid.currentTime
+        vidTim.innerHTML = Math.round(myvid.currentTime)
+    }
+
+</script>
+</body>
+</html>
